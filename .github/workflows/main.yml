@@ -27,19 +27,20 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
-          gradle-version: '9.3.1'
+          gradle-version: '8.6'
 
       - name: Generate debug keystore
-        working-directory: project
+        working-directory: project/GitaJyoti
         run: |
           keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
 
       - name: Build Debug APK
-        working-directory: project
+        working-directory: project/GitaJyoti
         run: gradle assembleDebug
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: GitaJyoti-app-debug
-          path: project/app/build/outputs/apk/debug/app-debug.apk
+          path: project/GitaJyoti/app/build/outputs/apk/debug/app-debug.apk
+
